@@ -1,0 +1,10 @@
+backbone: small
+reg: False
+
+hydra:
+  run:
+    dir: checkpoints/${backbone}-${reg}-singlerun
+
+  sweep:
+    dir: checkpoints
+    subdir: ${backbone}-${reg}
