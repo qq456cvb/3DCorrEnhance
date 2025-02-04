@@ -41,16 +41,20 @@ You may also be interested in our previous work **[SparseDFF](https://helloqxwan
 7. [BibTeX](#bibtex)
 
 ## Change Logs
+- **`2025/2/4`** - Uploaded more DINOv2 variants (DINOv2-Small/Large/Giant). Provide the environment requirements.
 - **`2025/1/26`** - Uploaded pretrained models (DINOv2-Base) along with training/evaluation recipes.
 
 ## Huggingface Demo  
 We provide a Huggingface demo at https://huggingface.co/spaces/qq456cvb/3DCorrEnhance.
 
 ## Environment Setup  
-Tutorial coming soon.
+Our environment information can be found in `requirements.txt`. You can install them by:
+```python
+pip install -r requirements.txt
+```
 
 ## Quick Start  
-Our finetuned DINOv2-Base model is available at [Huggingface](https://huggingface.co/qq456cvb/3DCorrEnhance/tree/main). More ViT models will be added shortly. To load DINOv2-Base, run:
+Our finetuned DINOv2-Small/Base/Large/Giant model is available at [Huggingface](https://huggingface.co/qq456cvb/3DCorrEnhance/tree/main). More ViT models will be added shortly. To load DINOv2-Base, run:
 
 ```python
 from finetune import FinetuneDINO
