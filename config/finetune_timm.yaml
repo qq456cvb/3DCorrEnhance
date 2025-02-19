@@ -1,0 +1,9 @@
+vit_name: clip
+
+hydra:
+  run:
+    dir: checkpoints/${vit_name}-singlerun
+
+  sweep:
+    dir: checkpoints
+    subdir: ${vit_name}

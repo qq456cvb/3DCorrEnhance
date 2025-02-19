@@ -41,6 +41,7 @@ You may also be interested in our previous work **[SparseDFF](https://helloqxwan
 7. [BibTeX](#bibtex)
 
 ## Change Logs
+- **`2025/2/19`** - Uploaded other ViT-family models.
 - **`2025/2/18`** - Uploaded two missing files for PF-PASCAL evaluation.
 - **`2025/2/4`** - Uploaded more DINOv2 variants (DINOv2-Small/Large/Giant). Provide the environment requirements.
 - **`2025/1/26`** - Uploaded pretrained models (DINOv2-Base) along with training/evaluation recipes.
@@ -55,11 +56,17 @@ pip install -r requirements.txt
 ```
 
 ## Quick Start  
-Our finetuned DINOv2-Small/Base/Large/Giant model is available at [Huggingface](https://huggingface.co/qq456cvb/3DCorrEnhance/tree/main). More ViT models will be added shortly. To load DINOv2-Base, run:
+Our finetuned DINOv2-Small/Base/Large/Giant and other ViT-family models are available at [Huggingface](https://huggingface.co/qq456cvb/3DCorrEnhance/tree/main). To load DINOv2-Base, run:
 
 ```python
 from finetune import FinetuneDINO
 model = FinetuneDINO.load_from_checkpoint('https://huggingface.co/qq456cvb/3DCorrEnhance/resolve/main/dinov2_base.ckpt', r=4, backbone_size='base').eval().cuda()
+```
+
+To load other ViT models (e.g., CLIP), run:
+```python
+from finetune_timm import FinetuneTIMM
+model = FinetuneTIMM.load_from_checkpoint('https://huggingface.co/qq456cvb/3DCorrEnhance/resolve/main/clip.ckpt', r=4, vit='clip').eval().cuda()
 ```
 
 To extract descriptors for specific keypoints (a `Nx2` numpy array), use:

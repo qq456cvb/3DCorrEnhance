@@ -27,43 +27,37 @@ from visdom import Visdom
 from data_utils.dataset import AugmentedDataset, ObjaverseCorrDataset
 from utils.functions import fix_random_seeds, sigmoid, interpolate_features
 from utils.model import _LoRA_qkv
+import timm
 
 
-class FinetuneDINO(pl.LightningModule):
-    def __init__(self, r, backbone_size, reg=False, datasets=None):
+class FinetuneTIMM(pl.LightningModule):
+    def __init__(self, r, vit, datasets=None):
         super().__init__()
         assert r > 0
-        self.backbone_size = backbone_size
-        self.backbone_archs = {
-            "small": "vits14",
-            "base": "vitb14",
-            "large": "vitl14",
-            "giant": "vitg14",
+        self.embedding_dim = 768
+        model_configs = {
+            'mae': 'vit_base_patch16_224.mae',
+            'clip': 'vit_base_patch16_clip_384.laion2b_ft_in12k_in1k',
+            'deit': 'deit3_base_patch16_224.fb_in1k'
         }
-        self.embedding_dims = {
-            "small": 384,
-            "base": 768,
-            "large": 1024,
-            "giant": 1536,
-        }
-        self.backbone_arch = self.backbone_archs[self.backbone_size]
-        if reg:
-            self.backbone_arch = f"{self.backbone_arch}_reg"
-        self.embedding_dim = self.embedding_dims[self.backbone_size]
+
+        self.backbone_name = model_configs[vit]
+        print(f"Loading {self.backbone_name}")
+        model = timm.create_model(self.backbone_name, pretrained=True, dynamic_img_size=True).cuda().eval()
+
+        data_config = timm.data.resolve_model_data_config(model)
+        transforms = timm.data.create_transform(**data_config, is_training=False)
         
-        self.backbone_name = f"dinov2_{self.backbone_arch}"
-        dinov2 = torch.hub.load(repo_or_dir="facebookresearch/dinov2", model=self.backbone_name)
         self.datasets = datasets
         
-        # create for storage, then we can init them or load weights
         self.w_As = []  # These are linear layers
         self.w_Bs = []
         # freeze first
-        for param in dinov2.parameters():
+        for param in model.parameters():
             param.requires_grad = False
 
         # finetune the last 4 blocks
-        for _, blk in enumerate(dinov2.blocks[-4:]):
+        for _, blk in enumerate(model.blocks[-4:]):
             w_qkv_linear = blk.attn.qkv
             self.dim = w_qkv_linear.in_features
             w_a_linear_q = nn.Linear(self.dim, r, bias=False)
@@ -83,7 +77,7 @@ class FinetuneDINO(pl.LightningModule):
             )
         self.reset_parameters()
 
-        self.dinov2 = dinov2
+        self.model = model
         self.downsample_factor = 8
 
         self.refine_conv = nn.Conv2d(self.embedding_dim, self.embedding_dim, kernel_size=3, stride=1, padding=1)
@@ -91,10 +85,10 @@ class FinetuneDINO(pl.LightningModule):
         self.thresh3d_pos = 5e-3
         self.thres3d_neg = 0.1
         
-        self.patch_size = 14
+        self.patch_size = model.patch_embed.patch_size[0]
         self.target_res = 640
         
-        self.input_transform = T.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))
+        self.input_transform = transforms.transforms[-1]
         
     def reset_parameters(self) -> None:
         for w_A in self.w_As:
@@ -117,7 +111,6 @@ class FinetuneDINO(pl.LightningModule):
         pass
 
     def on_load_checkpoint(self, checkpoint: Dict[str, Any]) -> None:
-        # print(checkpoint.keys())
         self.refine_conv.load_state_dict(checkpoint['state_dict']['refine_conv'])
         
         for i, w_A_linear in enumerate(self.w_As):
@@ -164,9 +157,9 @@ class FinetuneDINO(pl.LightningModule):
         
         pts = pts * torch.tensor(resize_factor).to(pts.device)
         
-        result = self.dinov2.forward_features(self.input_transform(rgb_resized))
+        result = self.model.forward_features(self.input_transform(rgb_resized))[:, 1:]
         
-        feature = result['x_norm_patchtokens'].reshape(rgb_resized.shape[0], patch_h, patch_w, -1).permute(0, 3, 1, 2)
+        feature = result.reshape(rgb_resized.shape[0], patch_h, patch_w, -1).permute(0, 3, 1, 2)
         feature = self.refine_conv(feature)
             
         feature = interpolate_features(feature, pts, h=patch_h * 14, w=patch_w * 14, normalize=False).permute(0, 2, 1)
@@ -182,8 +175,8 @@ class FinetuneDINO(pl.LightningModule):
         patch_h, patch_w = tgt_size[0] // self.downsample_factor, tgt_size[1] // self.downsample_factor
         rgb_resized = functional.resize(rgbs, (patch_h * self.patch_size, patch_w * self.patch_size))
         
-        result = self.dinov2.forward_features(self.input_transform(rgb_resized))
-        feature = result['x_norm_patchtokens'].reshape(rgbs.shape[0], patch_h, patch_w, -1).permute(0, 3, 1, 2)
+        result = self.model.forward_features(self.input_transform(rgb_resized))[:, 1:]
+        feature = result.reshape(rgbs.shape[0], patch_h, patch_w, -1).permute(0, 3, 1, 2)
         feature = self.refine_conv(feature)
         feature = functional.resize(feature, (rgbs.shape[-2], rgbs.shape[-1])).permute(0, 2, 3, 1)
         if normalize:
@@ -230,7 +223,7 @@ class FinetuneDINO(pl.LightningModule):
 from pytorch_lightning.callbacks import ModelCheckpoint
 import hydra
 
-@hydra.main(config_path='./config', config_name='finetune', version_base='1.2')
+@hydra.main(config_path='./config', config_name='finetune_timm', version_base='1.2')
 def main(cfg):
     fix_random_seeds()
     
@@ -238,7 +231,7 @@ def main(cfg):
     output_dir = hydra_cfg['runtime']['output_dir']
     
     logger = TensorBoardLogger(output_dir)
-    pl_module = FinetuneDINO(r=4, backbone_size=cfg.backbone, reg=cfg.reg)
+    pl_module = FinetuneTIMM(r=4, vit=cfg.vit_name)
     trainer = pl.Trainer(max_epochs=100, accelerator='gpu', callbacks=[ModelCheckpoint(save_last=True, every_n_epochs=10, save_top_k=-1)], 
                          gradient_clip_val=1.0, logger=logger)
     trainer.fit(pl_module)
