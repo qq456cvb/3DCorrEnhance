@@ -41,6 +41,7 @@ You may also be interested in our previous work **[SparseDFF](https://helloqxwan
 7. [BibTeX](#bibtex)
 
 ## Change Logs
+- **`2025/2/18`** - Uploaded two missing files for PF-PASCAL evaluation.
 - **`2025/2/4`** - Uploaded more DINOv2 variants (DINOv2-Small/Large/Giant). Provide the environment requirements.
 - **`2025/1/26`** - Uploaded pretrained models (DINOv2-Base) along with training/evaluation recipes.
 
