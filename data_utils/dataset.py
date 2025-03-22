@@ -74,7 +74,7 @@ class ObjaverseCorrDataset(torch.utils.data.Dataset):
         pose = self.poses[i]
         # extrinsic = np.linalg.inv(pose)
         extrinsic = pose
-        chosen = np.random.choice(len(keypoints2d), 3000, replace=True if len(keypoints2d) > 3000 else False)
+        chosen = np.random.choice(len(keypoints2d), 3000, replace=True if len(keypoints2d) < 3000 else False)
         keypoints2d = keypoints2d[chosen]
         keypoints3d = img_coord_2_obj_coord(keypoints2d, depth, self.intrinsic, extrinsic)
         return {
