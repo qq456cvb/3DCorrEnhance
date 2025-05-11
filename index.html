@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="3DCorrEnhance" />
+    <meta
+      name="keywords"
+      content="Vision Foundation Models, Vision Transformer, 3D Equivariance, Correspondence Enhancement"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3DCorrEnhance</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMWMSYT7XX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PMWMSYT7XX');
+    </script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css" />
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css" />
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+    />
+    <link rel="stylesheet" href="./static/css/index.css" />
+    <link rel="icon" href="./static/images/favicon.png" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+  </head>
+
+  <body>
+    <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-start" style="flex-grow: 1; justify-content: center">
+          <a class="navbar-item" href="https://forcemimic.github.io/">
+            <span class="icon">
+              <i class="fas fa-home"></i>
+            </span>
+          </a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link"> Related Work </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="https://xxx"> xxx </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav> -->
+
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title">
+                <span class="highlight">🌐 3DCorrEnhance</span>
+              </h1>
+              <h1 class="title is-2 publication-title">
+                <span>Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Feature Finetuning</span>
+              </h1>
+
+              <h4 class="title is-4 conference"><a href="https://iclr.cc/Conferences/2025" class="conference">The Thirteenth International Conference on Learning Representations (<span class="grad_text">ICLR</span>) 2025</a></h4>
+
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  <a href="mailto:yangyou@stanford.edu">Yang You</a
+                  ><sup>1</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="mailto:yixinli@stanford.edu">Yixin Li</a
+                  ><sup>1</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="mailto:congyue@cs.stanford.edu">Congyue Deng</a
+                  ><sup>1</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="mailto:yue.w@usc.edu">Yue Wang</a
+                  ><sup>2</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="mailto:guibas@cs.stanford.edu">Leonidas Guibas</a
+                    ><sup>1</sup>
+                </span>
+              </div>
+
+              <div class="is-size-5 publication-authors">
+                <span class="author-block"><sup>1</sup>Stanford University</span>,
+                <span class="author-block"><sup>2</sup>University of Southern California</span>
+              </div>
+
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <span class="link-block">
+                    <a
+                      href="https://arxiv.org/abs/2411.19458"
+                      class="external-link button is-normal is-rounded is-orange"
+                    >
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Paper</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a
+                    href="https://github.com/qq456cvb/3DCorrEnhance"
+                    class="external-link button is-normal is-rounded is-orange"
+                    >
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                </div>
+              </div>
+
+              <img
+                src="./static/images/teaser.png"
+                alt="Teaser"
+                style="width: 100%">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Vision foundation models, 
+                particularly the ViT family, 
+                have revolutionized image understanding by providing rich semantic features. 
+                However, despite their success in 2D comprehension, their abilities on grasping 3D spatial relationships are still unclear. 
+                In this work, we evaluate and enhance the 3D awareness of ViT-based models. 
+                We begin by systematically assessing their ability to learn 3D equivariant features, 
+                specifically examining the consistency of semantic embeddings across different viewpoints. 
+                Our findings indicate that improved 3D equivariance leads to better performance on various downstream tasks, 
+                including pose estimation, tracking, and semantic transfer. Building on this insight, 
+                we propose a simple yet effective finetuning strategy based on 3D correspondences, 
+                which significantly enhances the 3D correspondence understanding of existing vision models. Remarkably, 
+                finetuning on a single object for one iteration results in substantial gains. 
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3" id="HybridIL">Evaluation of 3D Equivariance</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered has-text-justified">
+          <div class="column content">
+            <img
+                src="./static/images/qualitative.png"
+                alt="Pipeline"
+                style="width: 100%"
+              />
+
+            <p>
+              To evaluate 3D equivariance, we utilize rendered or annotated multiview correspondences from Objaverse and MVImgNet, covering both synthetic and real images.
+              For Objaverse, we randomly select 1,000 objects from the Objaverse repository, rendered across 42 uniformly distributed camera views, producing 42,000 images.
+              Dense correspondences are computed for each object across every unique ordered pair of views, resulting in 1.8 billion correspondence pairs for evaluation. 
+              Similarly, 1,000 objects are randomly drawn from MVImgNet, yielding 33.3 million annotated correspondence pairs for evaluation. 
+              Since MVImgNet employs COLMAP to reconstruct 3D points, it provides sparser correspondences compared to Objaverse.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <div class="column content has-text-justified">
+              <ul>
+                <li><b>Metrics</b></li>
+                <ul>
+                  <li><b>Average Pixel Error % (APE):</b> a metric that quantifies the average distance between predicted and ground-truth pixel correspondences,
+                     normalized by the length of the shortest image edge</li>
+                  <li><b>Percentage of Correct Dense Point % (PCDP):</b> a metric designed to evaluate dense correspondences, similar to Percentage of Correct Keypoints % (PCK).</li>
+                </ul>
+              </ul>
+              <br />
+
+              <img
+                src="./static/images/quantitative_comparison.png"
+                alt="Controller"
+                style="width: 100%"
+              />
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">3D Equivariance Helps 3D Tasks</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered has-text-justified">
+          <div class="column content">
+            <p>
+              3D Equivariance itself is not interesting unless it can be used. 
+              Below, we will talk about three mature downstream applications that require 3D equivariance capability, 
+              and show a correlation between the quality of 3D equivariance and the downstream applications.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered has-text-justified" style="display: flex; align-items: center;">
+          <div class="column content" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <img
+              src="./static/images/pose.png"
+              alt="Quantitative Results"
+              style="width: 100%;"
+            />
+            <br />
+            <p>Pose Estimation</p>
+          </div>
+        
+          <div class="column content" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <img
+              src="./static/images/tracking.png"
+              alt="Quantitative Results"
+              style="width: 100%;"
+            />
+            <br />
+            <p>Video Tracking</p>
+          </div>
+        
+          <div class="column content" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <img
+              src="./static/images/semantic.png"
+              alt="Quantitative Results"
+              style="width: 100%;"
+            />
+            <br />
+            <p>Semantic Transfer</p>
+          </div>
+        </div>
+
+        <div class="column content has-text-justified">
+          The three tasks we evaluated—pose estimation, video tracking, and semantic correspondence—are intentionally selected to cover diverse aspects of correspondence estimation, ranging from simpler to more complex scenarios:
+            <ul style="margin-left: 20px;">
+              <li><b>Pose Estimation:</b> Examines correspondences within the same instance under rigid transformations (SE(3)).</li>
+              <li><b>Video Tracking:</b> Extends this to correspondences for the same instance under potential non-rigid or articulated transformations, such as humans or animals in motion.</li>
+              <li><b>Semantic Correspondence:</b> Requires correspondences across different instances with similar semantics, often under arbitrary viewpoint changes.</li>
+            </ul>
+          <br />
+        </div>
+        
+        <img
+                src="./static/images/corr.png"
+                alt="Pipeline"
+                style="width: 100%"
+              />
+        
+              Along the horizontal axis, lower APE indicates better feature equivariance, while the vertical axis reflects higher task performance across all four plots. 
+              The data points align roughly along the diagonal from the top left to the bottom right, 
+              suggesting a strong correlation between improved feature equivariance and better task performance.
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Finetuned 3D Equivariance Leads to Better 3D Task Performance</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered has-text-justified">
+          <div class="column content">
+            <p>
+              The high-level intuition of improving the multiview equivariance of the network features is to enforce the 
+              similarity between features of corresponding pixels in 3D space. We apply LoRA in the last four blocks to finetune large foundation models, 
+              we introduced a single convolutional layer with a kernel size of 3 and a stride of 1. 
+              The motivation behind this addition is rooted in the observation that ViT-family models process image tokens as patches, 
+              resulting in much lower-resolution feature maps.  It is beneficial to explicitly exchange information between neighboring patches 
+              before interpolation to achieve more accurate results.
+            </p>
+            <img
+                src="./static/images/finetune.png"
+                alt="Pipeline"
+                style="width: 100%"
+              />
+              <div class="column content has-text-justified">
+                Remarkably,
+                  <ul style="margin-left: 20px;">
+                    <li>Fine-tuning on just <b>one</b> object provides significant performance improvements.</li>
+                    <li>The method is object-agnostic, the choice of object does not affect performance significantly. Even simple shapes like an untextured hemisphere can enhance the 3D correspondence understanding of the ViTs in these tasks.</li>
+                    <li>Training with just a <b>single multi-view pair</b> of <b>one object</b> for a single iteration significantly boosts the model’s 3D equivariance</li>
+                  </ul>
+                <br />
+              </div>
+          </div>
+        </div>
+      </div>
+
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <div class="columns is-centered has-text-centered">
+          <h2 class="title">BibTeX</h2>
+        </div>
+        <p>If you find it helpful, please consider citing our work: </p>
+        <pre><code>@article{you2024multiview,
+  title={Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Feature Finetuning},
+  author={You, Yang and Li, Yixin and Deng, Congyue and Wang, Yue and Guibas, Leonidas},
+  journal={arXiv preprint arXiv:2411.19458},
+  year={2024}
+}
+</code></pre>
+      <p>
+        If you have further questions, please feel free to drop an email to
+        <a href="mailto:yangyou@stanford.edu">yangyou@stanford.edu</a>,
+        <a href="mailto:yixinli@stanford.edu">yixinli@stanford.edu</a>.
+      </p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+              <p>
+                This website is licensed under a
+                <a
+                  rel="license"
+                  href="http://creativecommons.org/licenses/by-sa/4.0/"
+                  >Creative Commons Attribution-ShareAlike 4.0 International
+                  License</a
+                >. This page is modified upon
+                <a href="https://forcemimic.github.io/">Forcemimic</a> website (<a
+                  href="https://forcemimic.github.io/"
+                  >source</a
+                >).
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
