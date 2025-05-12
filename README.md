@@ -11,8 +11,8 @@ Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Fea
     <a href='https://arxiv.org/abs/2411.19458'>
       <img src='https://img.shields.io/badge/Arxiv-PDF-orange?style=flat&logo=arxiv&logoColor=orange' alt='Paper PDF'>
     </a>
-    <a href='#'>
-      <img src='https://img.shields.io/badge/Project-Page-green?style=flat&logo=googlechrome&logoColor=green' alt='Project Page (Coming soon)'>
+    <a href='https://qq456cvb.github.io/3DCorrEnhance'>
+      <img src='https://img.shields.io/badge/Project-Page-green?style=flat&logo=googlechrome&logoColor=green' alt='Project Page'>
     </a>
     <a href="https://huggingface.co/spaces/qq456cvb/3DCorrEnhance">
         <img alt="Spaces" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue">
