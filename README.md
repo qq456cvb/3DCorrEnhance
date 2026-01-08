@@ -99,7 +99,7 @@ with torch.no_grad():
 ## Finetuning on Objaverse
 
 ### Data Preparation
-To prepare the multi-view training data on Objaverse, first download the [Objaverse](https://github.com/allenai/objaverse-xl) glbs (only a 10k subset is required, as defined in `data/10k.txt`). Then run `data_utils/render_objects.py` to render 10K randomly sampled Objaverse objects with `blenderproc`.
+To prepare the multi-view training data on Objaverse, first download the [Objaverse](https://huggingface.co/datasets/allenai/objaverse/tree/main/glbs) glbs (only a 10k subset is required, as defined in `data/10k.txt`). Then run `data_utils/render_objects.py` to render 10K randomly sampled Objaverse objects with `blenderproc`.
 
 Your directory structure should look like this:
 
