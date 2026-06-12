@@ -418,7 +418,7 @@ def semantic_transfer(model, num_cats=None):
         categories = categories[:num_cats]
 
     for cat in categories:
-        files, kps, _ = load_pascal_data('/orion/u/yangyou/ViewInv/data/PF-dataset-PASCAL', size=img_size, category=cat, same_view=False)
+        files, kps, _ = load_pascal_data('data/PF-dataset-PASCAL', size=img_size, category=cat, same_view=False)
         
         gt_correspondences = []
         pred_correspondences = []

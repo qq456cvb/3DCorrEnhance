@@ -8,8 +8,8 @@ Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Fea
   <h3>
     <a href="https://qq456cvb.github.io">Yang You</a>, <a href="https://github.com/yixinliii">Yixin Li</a>, <a href="https://cs.stanford.edu/~congyue/">Congyue Deng</a>, <a href="https://yuewang.xyz/">Yue Wang</a>, <a href="https://geometry.stanford.edu/">Leonidas Guibas</a>
     <br><br>
-    <a href='https://arxiv.org/abs/2411.19458'>
-      <img src='https://img.shields.io/badge/Arxiv-PDF-orange?style=flat&logo=arxiv&logoColor=orange' alt='Paper PDF'>
+    <a href='https://openreview.net/forum?id=CNO4rbSV6v'>
+      <img src='https://img.shields.io/badge/Paper-ICLR%202025-orange?style=flat' alt='Paper'>
     </a>
     <a href='https://qq456cvb.github.io/3DCorrEnhance'>
       <img src='https://img.shields.io/badge/Project-Page-green?style=flat&logo=googlechrome&logoColor=green' alt='Project Page'>
@@ -159,7 +159,7 @@ For video tracking evaluation, download the data from [TAP-Vid-DAVIS](https://gi
     └── lowtexture_test_data/
 ```
 
-For semantic transfer, download the [PF-PASCAL](https://www.di.ens.fr/willow/research/proposalflow/) dataset and place it under `data/`:
+For semantic transfer, download the [PF-PASCAL](https://www.di.ens.fr/willow/research/proposalflow/) dataset and place it under `data/`. Then copy the two test-pair files shipped with this repository (`data/test_pairs_pf_different_views.csv` and `data/test_pairs_pf_same_views.csv`) into the `PF-dataset-PASCAL` folder:
 
 ```
 3DCorrEnhance/
@@ -167,8 +167,8 @@ For semantic transfer, download the [PF-PASCAL](https://www.di.ens.fr/willow/res
     └── PF-dataset-PASCAL/
         ├── Annotations/
         ├── JPEGImages/
-        ├── test_pairs_pf_different_views.txt
-        └── test_pairs_pf_same_views.txt
+        ├── test_pairs_pf_different_views.csv
+        └── test_pairs_pf_same_views.csv
 ```
 
 ### Run Evaluation
@@ -185,13 +185,11 @@ Some code is adapted from [DINO-Tracker](https://dino-tracker.github.io/), [FiT3
 If you find our work helpful, please consider citing:
 
 ```
-@misc{you2024multiviewequivarianceimproves3d,
-      title={Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Feature Finetuning}, 
+@inproceedings{you2025multiview,
+      title={Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Feature Finetuning},
       author={Yang You and Yixin Li and Congyue Deng and Yue Wang and Leonidas Guibas},
-      year={2024},
-      eprint={2411.19458},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2411.19458}, 
+      booktitle={International Conference on Learning Representations (ICLR)},
+      year={2025},
+      url={https://openreview.net/forum?id=CNO4rbSV6v},
 }
 ```
