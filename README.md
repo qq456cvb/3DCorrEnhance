@@ -1,5 +1,3 @@
-Project website for [Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Feature Finetuning](https://arxiv.org/abs/2411.19458).
+The project page for [Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Feature Finetuning](https://arxiv.org/abs/2411.19458) (ICLR 2025) has moved to https://qq456cvb.github.io/projects/3dcorrenhance.
 
----
-
-This website is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/). This page is modified upon [ForceMimic](https://forcemimic.github.io) website ([source](https://forcemimic.github.io)).
+This branch only keeps a redirect, so that https://qq456cvb.github.io/3DCorrEnhance/ still works.
