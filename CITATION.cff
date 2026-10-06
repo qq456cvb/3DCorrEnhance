@@ -14,7 +14,7 @@ authors:
   - family-names: "Guibas"
     given-names: "Leonidas"
 repository-code: "https://github.com/qq456cvb/3DCorrEnhance"
-url: "https://qq456cvb.github.io/3DCorrEnhance"
+url: "https://qq456cvb.github.io/projects/3dcorrenhance"
 preferred-citation:
   type: conference-paper
   title: "Multiview Equivariance Improves 3D Correspondence Understanding with Minimal Feature Finetuning"
